@@ -1,17 +1,24 @@
 # OoTDebugPatcher
 
-A lightweight tool to patch a standard Zelda: Ocarina of Time US ROM into a Debug ROM.
+A lightweight command-line tool to patch a standard Zelda: Ocarina of Time US ROM into a Debug ROM (`ZELOOTD.z64`). 
+
+The tool functions completely stand-alone. The BPS patch data is embedded directly into the executable as a Base64 string and decoded in RAM at runtime.
 
 ## How It Works
 
-1. Run the `OoTDebugPatcher.exe`.
-2. Load your original **Zelda: Ocarina of Time (US)** ROM.
-3. Select the **destination folder**.
+1. Run the `OoTDebugPatcher.exe` (or run the python script via terminal).
+2. Enter the path to your original **Zelda: Ocarina of Time (US)** ROM when prompted.
+3. The tool patches the ROM automatically. 
 
-The tool patches the ROM automatically. You will find the finished Debug ROM in your chosen destination folder immediately.
+The generated Debug ROM will be saved instantly as **`ZELOOTD.z64`** in the same directory as the patcher.
 
-## Requirements & Compatibility
+## Features & Compatibility
 
-*   **Tested OS:** Windows 11 (Only tested on Win 11; older versions like Win 10 may work but are unsupported).
-*   **Supported ROM Formats:** `.z64` or `.n64` (Highly recommended).
-*   *Note on `.v64`:* Byte-swapped ROMs (`.v64`) may work, but `.z64` is preferred for best compatibility.
+*   **Tested OS:** Windows 11 (Other platforms may work but are unsupported).
+*   **Auto-Format Conversion:** Automatically detects and converts `.z64` (Big Endian), `.v64` (Byte-swapped), and `.n64` (Little Endian) formats into the correct format before patching.
+*   **Built-in Integrity Check:** Performs a CRC32 checksum validation. If you provide the wrong version of the Zelda ROM, the program will safely abort and warn you.
+
+## Technical Details
+
+*   **No File Trash:** No temporary `.bps` patch files are written to your storage disk. Everything is decoded directly in the system memory.
+*   **Source Patch:** The embedded data originates from the official `ZELOOTMA` (Master Quest Debug) `.bps` patch file.
